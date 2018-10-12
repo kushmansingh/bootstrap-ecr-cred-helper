@@ -1,5 +1,6 @@
 FROM golang:1.10
 
+ENV REGISTRY=
 COPY entrypoint /go/bin/
 COPY amazon-ecr-credential-helper /go/src/github.com/awslabs/amazon-ecr-credential-helper
 WORKDIR /go/src/github.com/awslabs/amazon-ecr-credential-helper/

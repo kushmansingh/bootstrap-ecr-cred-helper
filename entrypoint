@@ -9,4 +9,10 @@ cat > creds.json << EOF
 }
 EOF
 
-jq -s '.[0] * .[1]' /home/.docker/config.json creds.json
+if [ ! -f /home/.docker/config.json ]; then
+	mkdir -p /home/.docker
+	echo "{}" > /home/.docker/config.json
+fi
+
+jq -s '.[0] * .[1]' /home/.docker/config.json creds.json > newconfig.json
+cp newconfig.json /home/.docker/config.json
