@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+cp /go/src/github.com/awslabs/amazon-ecr-credential-helper/bin/local/docker-credential-ecr-login  /home/bin/
+cat > creds.json << EOF
+{
+ 	"credHelpers": {
+ 		"$REGISTRY": "ecr-login"
+ 	}
+}
+EOF
+
+jq -s '.[0] * .[1]' /home/.docker/config.json creds.json
